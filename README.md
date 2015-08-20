@@ -1,6 +1,5 @@
-# Confiabilidade
-## em Sistemas Mecânicos
-Disciplina PROMEC UFRGS 2015-2
+# Confiabilidade em Sistemas Mecânicos
+Disciplina PROMEC UFRGS 2015-2  
 Prof. Herbert
 
 ###Trabalho de programação em MATLAB
