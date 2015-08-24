@@ -1,4 +1,4 @@
-function Pf = montecarlo(g,m,s,R,n,dists)
+function O = montecarlo(g,m,s,R,n,dists)
 %n=1e6;
 
 S = diag(s);
@@ -24,6 +24,7 @@ for i=1:length(m)
 	end
 end
 
-Pf = sum(g(X)<0)/n
-CVPf = sqrt((1-Pf)/(n*Pf))
-beta = norminv(1-Pf)
+Pf = sum(g(X)<0)/n;
+O.Pf = Pf;
+O.CVPf = sqrt((1-Pf)/(n*Pf));
+O.beta = norminv(1-Pf);
