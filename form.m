@@ -53,7 +53,7 @@ while crit>1e-8
 	end
 	zn = grad * (grad'*zo-g(xz(zo)))/(grad'*grad);
 	k=k+1;
-	crit = sqrt(sumsqr(zn-zo));
+	crit = sqrt((zn-zo)'*(zn-zo));
 end
 
 mpfp.k = k;
