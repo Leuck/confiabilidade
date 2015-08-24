@@ -13,4 +13,4 @@ dists = {'normal' 'normal' 'normal'};
 
 n = 2e6;
 
-X = montecarlo(g,M,S,r,n,dists);
+X = montecarlo(g,M,S,r,n,dists)

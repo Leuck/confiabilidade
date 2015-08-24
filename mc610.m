@@ -13,4 +13,4 @@ dists = {'lognormal' 'lognormal' 'gumbel'};
 
 n = 2e6;
 
-X = montecarlo(g,M,S,r,n,dists);
+X = montecarlo(g,M,S,r,n,dists)
