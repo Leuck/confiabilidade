@@ -48,12 +48,12 @@ while crit>1e-8
 	grad = zeros(length(m),1);
 	for i=1:length(m)
 		zod = zo;
-		zod(i) -= dz;
+		zod(i) = zo(i)-dz;
 		grad(i) = ( g(xz(zo))-g(xz(zod)) )/dz;
 	end
 	zn = grad * (grad'*zo-g(xz(zo)))/(grad'*grad);
-	k+=1;
-	crit = sqrt(sumsq(zn-zo));
+	k=k+1;
+	crit = sqrt(sumsqr(zn-zo));
 end
 
 mpfp.k = k;
