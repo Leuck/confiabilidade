@@ -1,15 +1,28 @@
+% montecarlo(g,m,s,R,n,dists)
+%
+% Entradas:
+%   g: handle para a função de estado limite
+%   m: vetor de médias
+%   s: vetor de desvios padrão
+%   R: matriz de correlação
+%   n: número de pontos aleatórios para avaliar a f.e.l.
+%   dists: nome das distribuições
+% Saídas:
+%   O: estrutura contendo a probabilidade de falha (Pf), o coeficiente de
+%      variação (CV) e o beta (beta).
 function O = montecarlo(g,m,s,R,n,dists)
-%n=1e6;
 
-S = diag(s);
-C = S*R*S;
-L = chol(R,'lower');
+S = diag(s);         % matriz S
+C = S*R*S;           % matriz de covariância
+L = chol(R,'lower'); % fatoração da matriz de correlação
 
+% n conjuntos de variáveis normais não correlacionadas
 Z = normrnd(0,1,[length(m) n]);
-Zc = L*Z;
-Uc = normcdf(Zc);
-X = zeros(size(Z));
+Zc = L*Z;           % imposição de correlação
+Uc = normcdf(Zc);   % variáveis correlacionadas distribuidas uniformemente
 
+% variáveis correlacionadas nas distribuições desejadas
+X = zeros(size(Z));
 for i=1:length(m)
 	if strcmp(dists{i},'normal')
 		X(i,:)= norminv(Uc(i,:),m(i),s(i));
@@ -24,7 +37,8 @@ for i=1:length(m)
 	end
 end
 
-Pf = sum(g(X)<0)/n;
+Pf = sum(g(X)<0)/n;         % probabilidade de falha
 O.Pf = Pf;
-O.CVPf = sqrt((1-Pf)/(n*Pf));
-O.beta = norminv(1-Pf);
+O.CV = sqrt((1-Pf)/(n*Pf)); % coeficiente de variação
+O.beta = norminv(1-Pf);     % beta
+
